@@ -584,11 +584,3 @@ for archivo in os.listdir(directorio):
 
 print(f"Número de archivos .txt en {directorio}: {contador_txt}")
 print(f"Número de archivos .txt en {directorio} y con los 7 digitos: {contador_7_digitos}")
-
-# PRESENTACION
-# 10 minutos max
-# intervenir algo
-# pipeline para la prpouesta 
-# comentar la arquictura
-# visual
-# comparaciones y resultados que nos ha ido bien
