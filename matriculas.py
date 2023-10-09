@@ -133,7 +133,7 @@ def find_license_plate(image):
     return location
 
 def get_contours(imgTransformed):
-    # Filter using contour area and remove small noise
+    # Filtro usando contour area y quitando ruido
 
     cnts = cv2.findContours(
         imgTransformed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -200,7 +200,7 @@ def homography(gray_img, location):
     La transformación asegura que la matrícula aparezca en la vista frontal, 
     haciendo más fácil su posterior análisis o reconocimiento.
     """
-    # Corrects rotation
+    # Corrige rotación
     src = order_points(np.squeeze(location).astype(np.float32))
     (tl, tr, br, bl) = src
     widthA = np.sqrt(((br[0] - bl[0]) ** 2) + ((br[1] - bl[1]) ** 2))
@@ -255,7 +255,7 @@ def img_to_str_easyocr(img_filename, show_plots=False):
     elif len(result) >= 1:
         result = ''.join(result).replace(" ", "")
 
-    # Replazar caracteres similares cuando no corresponden a su posición
+    # Reemplazar caracteres similares cuando no corresponden a su posición
     number_text_similarity = (("L", "4"), ("S", "5"),
                               ("Z", "2"), ("B", "8"), ("G", "6"))
     
@@ -279,15 +279,15 @@ Pasas como input la imagen de la matricula (una vez se a recortado) y realiza un
 """
 
 def img_to_str_similarity(img_filename, show_plots=False):
-    # Preprocess license plate image
+    # Preprocesado imagen matrícula
     license_plate_image = img_filename
     img, contours = preprocess_image(license_plate_image, show_plots=show_plots)
 
-    # Load alpha images
+    # Cargar imágenes alpha
     alpha_folder = "Alpha"
     alpha_images = load_alpha_images(alpha_folder)
 
-    # Cargar una imagen alfa para obtener sus dimensiones
+    # Cargar una imagen alpha para obtener sus dimensiones
     sample_alpha_path = os.path.join(alpha_folder, 'A.bmp')  # Reemplaza 'A.bmp' con un archivo que sepas que existe en la carpeta
     sample_alpha_img = cv2.imread(sample_alpha_path, 0)
     alpha_height, alpha_width = sample_alpha_img.shape
@@ -314,7 +314,7 @@ def img_to_str_similarity(img_filename, show_plots=False):
         # Aplicar un filtro Gaussiano para suavizar la imagen binaria
         smoothed_segment = cv2.GaussianBlur(binarized_segment, (5, 5), 0)
 
-        # Redimensionar el segmento para que coincida con las dimensiones de las imágenes alfa
+        # Redimensionar el segmento para que coincida con las dimensiones de las imágenes alpha
         aspect_ratio = w / h
         new_width = int(alpha_height * aspect_ratio)
         resized_segment = cv2.resize(smoothed_segment, (new_width, alpha_height))
@@ -328,7 +328,7 @@ def img_to_str_similarity(img_filename, show_plots=False):
             axes[i].imshow(resized_segment, cmap='gray')
             axes[i].axis('off')
    
-        # Calculate similarity with each alpha image
+        # Calcular similarity con cada imagen alpha
         for char, char_img in alpha_images.items():
             similarity = calculate_similarity(resized_segment, char_img)
             if similarity > max_similarity:
@@ -368,7 +368,7 @@ def preprocess_image(image_path, show_plots=False):
     
     contours, _ = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Ordenar por área y tomar los 7 más grandes
+    # Ordenar por área y coger los 7 más grandes
     sorted_by_area_contours = sorted(contours, key=cv2.contourArea, reverse=True)[:7]
     
     filtered_contours = []
@@ -428,7 +428,7 @@ def calculate_similarity(segment, char_img):
         #print("Imagen de caracter vacía. Saltando...")
         return 0
     
-    # Resize char_img to be the same size as segment
+    # Resize char_img al mismo size del segmento
     char_img = cv2.resize(char_img, (segment.shape[1], segment.shape[0]))
     
     # Calcular la correlación cruzada
@@ -501,7 +501,7 @@ def main_matriculas(mode="easyocr"):
         carpeta_output = "output_with_similarity"
         for filename in os.listdir(carpeta_input):
   
-            # Preprocess license plate image
+            # Preprocesado imagen matrícula
             license_plate_image = os.path.join(carpeta_input, filename)
 
             license_plate_str = img_to_str_similarity(license_plate_image, show_plots=False)
@@ -555,13 +555,26 @@ def inference_mode(img_filename, mode="easyocr"):
     # Eliminar el directorio temporal
     os.rmdir(directorio)
 
-# INFERENCE INDIVIDUAL LICENSE PLATE VISUAL EXTRACTOR
-#inference_mode("matriculas_db/im2.jpg", mode="easyocr")
-main_matriculas(mode="similarity")
+
+
+
+
+
+
+
+# ----------- EJECUCIÓN MAIN o INFERENCE -----------
+# ----- mode = "easyocr" o mode = "similarity" -----
+
+# INFERENCE MODE
+#inference_mode("matriculas_db/im3.jpg", mode="easyocr")
+
+# MAIN MODE
+main_matriculas(mode="easyocr")
 
 
 
 # ---------------------------------------------------------------
+# Contador de archivos
 #directorio = "output_with_easyocr"
 directorio = "output_with_similarity"
 
