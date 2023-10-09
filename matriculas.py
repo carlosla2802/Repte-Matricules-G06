@@ -463,13 +463,6 @@ def main_matriculas(mode="easyocr"):
             continue
 
 
-    #nombres_de_archivos_input = os.listdir(carpeta_input) # Obtener la lista de nombres de archivos en la carpeta de entrada
-    #cantidad_de_archivos_input = len(nombres_de_archivos_input) # Contar la cantidad de archivos
-    #print(cantidad_de_archivos_input)
-    #nombres_de_archivos_output = os.listdir(carpeta_output) # Obtener la lista de nombres de archivos en la carpeta de salida
-    #cantidad_de_archivos_output = len(nombres_de_archivos_output) # Contar la cantidad de archivos
-    #print(cantidad_de_archivos_output)
-
     #--------------------------------------------------------------------------------------------------------------------------------
     #img to str
 
@@ -560,9 +553,8 @@ def inference_mode(img_filename, mode="easyocr"):
 
 
 
-
-# ----------- EJECUCIÓN MAIN o INFERENCE -----------
-# ----- mode = "easyocr" o mode = "similarity" -----
+# <----------- EJECUCIÓN Main o Inference ----------->
+# <----- mode = "easyocr" o mode = "similarity" ----->
 
 # INFERENCE MODE
 #inference_mode("matriculas_db/im3.jpg", mode="easyocr")
@@ -573,8 +565,7 @@ main_matriculas(mode="easyocr")
 
 
 
-
-
+'''
 # ---------------------------------------------------------------
 # Contador de archivos
 #directorio = "output_with_easyocr"
@@ -599,3 +590,4 @@ for archivo in os.listdir(directorio):
 
 print(f"Número de archivos .txt en {directorio}: {contador_txt}")
 print(f"Número de archivos .txt en {directorio} y con los 7 digitos: {contador_7_digitos}")
+'''
