@@ -56,10 +56,10 @@ def detect_license_plate(img_filename, show_plots=False):
     
     itemp = color_image.copy()
 
-    if show_plots==True:
-        cv2.drawContours(itemp, [license_plate_location], -1, (124, 252, 0), 2)
-        cv2.imshow('Matrícula Localizada', itemp)
-        cv2.waitKey(0)
+    #if show_plots==True:
+        #cv2.drawContours(itemp, [license_plate_location], -1, (124, 252, 0), 2)
+        #cv2.imshow('Matrícula Localizada', itemp)
+        #cv2.waitKey(0)
 
     loc = license_plate_location.copy()
 
