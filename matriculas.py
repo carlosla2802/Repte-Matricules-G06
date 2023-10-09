@@ -554,8 +554,7 @@ def inference_mode(img_filename, mode="easyocr"):
 
     # Eliminar el directorio temporal
     os.rmdir(directorio)
-
-
+# ---------------------------------------------------------------
 
 
 
@@ -570,6 +569,9 @@ def inference_mode(img_filename, mode="easyocr"):
 
 # MAIN MODE
 main_matriculas(mode="easyocr")
+
+
+
 
 
 
