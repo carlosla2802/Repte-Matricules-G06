@@ -269,7 +269,7 @@ def img_to_str_easyocr(img_filename, show_plots=False):
 
     if show_plots==True:
         if result != result_modif:
-            print(f'La matricula detectada por easyocr es: {result}, se a actualizado a {result_modif} utilizando un number-text similarity dict')
+            print(f'La matricula detectada por easyocr es: {result}, se ha actualizado a {result_modif} utilizando un number-text similarity dict')
     
     return result_modif
 
